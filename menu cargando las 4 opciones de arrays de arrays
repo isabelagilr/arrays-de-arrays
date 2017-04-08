@@ -1,0 +1,150 @@
+// menu de arrays de arrays.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+#define MAX 10
+
+using namespace std;
+
+struct vecV{
+	int subvec[MAX];
+};
+
+struct vecM{
+	int submat[MAX][MAX];
+};
+
+struct matM{
+	int submats[MAX][MAX];
+};
+struct matV{
+	int vectores[MAX];
+};
+
+void cargar_vec_vec(vecV vect[],int n1, int n2);
+void cargar_vec_mat(vecM vec[],int n1, int n2, int n3);
+void cargar_mat_mat(matM mat[MAX][MAX],int n1, int n2, int n3,int n4);
+void cargar_mat_vec(matV matr[MAX][MAX],int n1, int n2, int n3);
+void main()
+{
+	vecV vect[MAX];
+	vecM vec[MAX];
+	matM mat[MAX][MAX];
+	matV matr[MAX][MAX];
+	int op,n1,n2,n3,n4;
+	do{
+	cout<<"            MENU"<<endl;
+	cout<<"(1) vector de vectores"<<endl;
+	cout<<"(2) vector de matrices"<<endl;
+	cout<<"(3) matriz de matrices"<<endl;
+	cout<<"(4) matriz de vectores"<<endl;
+	cout<<endl;
+	cout<<"ingrese una opcion"<<endl;
+	cin>>op;
+	switch(op)
+	{
+		case 1:
+			{
+			cout<<"ingrese el tamanho del vector externo"<<endl;
+			cin>>n1;
+			cout<<"ingrese el tamanho de los vectores internos"<<endl;
+			cin>>n2;
+			cargar_vec_vec(vect,n1,n2);
+			break;
+			}
+		case 2:
+			{
+			cout<<"ingrese el tamanho del vector externo"<<endl;
+			cin>>n1;
+			cout<<"ingrese las filas de las matrices internas"<<endl;
+			cin>>n2;
+			cout<<"ingrese las columnas de las matrices internas"<<endl;
+			cin>>n3;
+			cargar_vec_mat(vec,n1,n2,n3);
+			break;
+			}
+		case 3:
+			{
+			cout<<"ingrese las filas de las matriz externa"<<endl;
+			cin>>n1;
+			cout<<"ingrese las columnas de las matriz externa"<<endl;
+			cin>>n2;
+			cout<<"ingrese las filas de las matrices internas"<<endl;
+			cin>>n3;
+			cout<<"ingrese las columnas de las matrices internas"<<endl;
+			cin>>n4;
+			cargar_mat_mat(mat,n1,n2,n3,n4); //le estoy mandando mat y esta esta definida como matM (matriz de matrices)
+			break;
+			}
+		case 4:
+			{
+			cout<<"ingrese las filas de las matriz externa"<<endl;
+			cin>>n1;
+			cout<<"ingrese las columnas de las matriz externa"<<endl;
+			cin>>n2;
+			cout<<"ingrese el tamanho de los vectoes internos"<<endl;
+			cin>>n3;
+			cargar_mat_vec(matr,n1,n2,n3); // le estoy mandando una matr y esa esta definida como una matV (matriz de vectores)
+			break;
+			}
+		case 0:
+			{
+			cout<<"SALIR"<<endl;
+			break;
+			}
+		default:
+			{
+			cout<<"NO ES UNA OPCION"<<endl;
+			break;
+			}
+	}
+	}while(op=!0);
+	getch();
+}
+
+void cargar_vec_vec(vecV vect[],int n1, int n2)
+{
+	int i,j;
+	for(i=0;i<n1;i++)
+		for(j=0;j<n2;j++)
+			{
+				cout<<"vector["<<i<<"].subvector["<<j<<"]=";
+				cin>>vect[i].subvec[j];
+			}
+}
+void cargar_vec_mat(vecM vec[],int n1, int n2, int n3)
+{
+	int i,j,k;
+	for(i=0;i<n1;i++)
+		for(j=0;j<n2;j++)
+			for(k=0;k<n3;k++)
+			{
+				cout<<"vector["<<i<<"].submatriz["<<j<<"]["<<k<<"]=";
+				cin>>vec[i].submat[j][k];
+			}
+}
+void cargar_mat_mat(matM mat[MAX][MAX],int n1, int n2, int n3,int n4)
+{
+	int i,j,k,l;
+	for(i=0;i<n1;i++)
+		for(j=0;j<n2;j++)
+			for(k=0;k<n3;k++)
+				for(l=0;l<n4;l++)
+				{
+					cout<<"matriz["<<i<<"]["<<j<<"].submatriz["<<k<<"]["<<l<<"]=";
+					cin>>mat[i][j].submats[k][l];
+				}
+}
+void cargar_mat_vec(matV matr[MAX][MAX],int n1, int n2, int n3)
+{
+	int i,j,k;
+	for(i=0;i<n1;i++)
+		for(j=0;j<n2;j++)
+			for(k=0;k<n3;k++)
+			{
+				cout<<"matriz["<<i<<"]["<<j<<"].subvector["<<k<<"]=";
+				cin>>matr[i][j].vectores[k];
+			}
+}
