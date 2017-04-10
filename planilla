@@ -1,0 +1,92 @@
+// paises.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+#include <string>
+#define max 10
+
+using namespace std;
+
+struct adentro{
+	int dia;
+	int mes;
+	int anho;
+};
+
+string sumar_apeynom(string nom, string ap);
+void validarfecha(int &dia, int &mes, int &anho);
+void mostrar_planilla(string apenom[],adentro fechanaciminto[],adentro fechains[],int n);
+
+void main()
+{
+	string nombre[max], apellido[max],apenom[max],nom,ap;
+	adentro fechanacimiento[max],fechains[max];
+	int n,dia,mes,anho;
+	cout<<"ingrese cuantos alumnos son:"<<endl;
+	cin>>n;
+	for(int i=0;i<n;i++)
+	{
+		cin.ignore();
+		cout<<"ingrese el nombre"<<i<<endl;
+		getline(cin,nombre[i]);
+		cout<<"ingrese el apellido"<<i<<endl;
+		getline(cin,apellido[i]);
+		apenom[i]=sumar_apeynom(nombre[i],apellido[i]);
+		cout<<"ingrese fecha de nacimiento de "<<i<<endl;
+		validarfecha(dia,mes,anho);
+		fechanacimiento[i].dia=dia;
+		fechanacimiento[i].mes=mes;
+		fechanacimiento[i].anho=anho;
+		cout<<"ingrese fecha de inscripcion de "<<i<<endl;
+		validarfecha(dia,mes,anho);
+		fechains[i].dia=dia;
+		fechains[i].mes=mes;
+		fechains[i].anho=anho;
+	}
+	mostrar_planilla(apenom,fechanacimiento,fechains,n);
+	getch();
+}
+string sumar_apeynom(string nom, string ap)
+{
+	string c;
+	c=ap+nom;
+	return (c);
+
+}
+void validarfecha(int &dia, int &mes, int &anho)
+{
+	do{
+		cout<<"INGRESE DIA: ";
+		cin>>dia;
+	}while((dia<0)||(dia>31));
+	do{
+		cout<<"INGRESE MES: ";
+		cin>>mes;
+	}while((mes<0)||(mes>12));
+	do{
+		cout<<"INGRESE ANO: ";
+		cin>>anho;
+	}while((anho<1850)||(anho>2017));
+}
+
+void mostrar_planilla(string apenom[], adentro fechanacimiento[],adentro fechains[],int n)
+{
+	int i;
+	cout<<"----------planilla------------"<<endl;
+		cout<<" APELLIDO Y NOMBRE "<<"\t";
+		cout<<" FECHA DE NAC "<<"\t";
+		cout<<" FECHA DE INSCRP "<<"\t"<<endl;
+	for(i=0;i<n;i++)
+	{
+		cout<<apenom[i]<<"\t"<<"\t"<<"\t";
+		cout<<fechanacimiento[i].dia<<"/";
+		cout<<fechanacimiento[i].mes<<"/";
+		cout<<fechanacimiento[i].anho<<"\t"<<"\t";
+		cout<<fechains[i].dia<<"/";
+		cout<<fechains[i].mes<<"/";
+		cout<<fechains[i].anho<<endl;
+	}
+	cout<<endl;
+}
